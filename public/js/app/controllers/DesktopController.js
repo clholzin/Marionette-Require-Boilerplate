@@ -17,8 +17,12 @@ define(['App', 'backbone', 'marionette', 'jquery', 'views/WelcomeView', 'views/A
                 App.sideRegion.empty();
             },
         about:function() {
-            App.mainRegion.show(new AboutView());
-            App.sideRegion.show(new SideBarMain());
+            if(App.sideRegion.hasView()){
+                App.mainRegion.show(new AboutView());
+            }else{
+                App.mainRegion.show(new AboutView());
+                App.sideRegion.show(new SideBarMain());
+            }
         },
             //part of About
                 reports:function() {
