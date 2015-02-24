@@ -1,6 +1,8 @@
 <div class="container col-md-12">
 <div class="jumbotron">
-    <h1>Welcome, Hello</h1>
+    <h1>{{#if title}}{{title}}{{else}} {{Welcome}} {{/if}}
+        {{#if user}}{{user.username}} {{else}}, Hello {{/if}}
+        .</h1>
     <h2>Marionette-Require-Boilerplate</h2>
     <p>Boilerplate Marionette application to help you get started with the best tools and best practices</p>
 

@@ -51,7 +51,7 @@ require.config({
         },
         //Marionette
         "marionette":{
-            "deps":["underscore", "backbone", "jquery"],
+            "deps":["underscore", "backbone", "jquery","handlebars"],
             "exports":"Marionette"
         },
         //Handlebars

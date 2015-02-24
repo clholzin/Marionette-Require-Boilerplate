@@ -1582,7 +1582,8 @@
         // (JST / RequireJS for example) or if you want to change
         // the template engine used (Handebars, etc).
         compileTemplate: function(rawTemplate) {
-            return _.template(rawTemplate);
+            //return _.template(rawTemplate);
+            return Handlebars.compile(rawTemplate);
         }
     });
 
@@ -1610,8 +1611,10 @@
             return templateFunc(data);
         }
     };
-
-
+    //Handlebars extension
+    Backbone.Marionette.Renderer.render = function(template, data){
+        return template(data);
+    };
     /* jshint maxlen: 114, nonew: false */
     // View
     // ----
@@ -2041,6 +2044,30 @@
             return this;
         }
     });
+
+    // Handlebars mixin OverRide
+    Backbone.Marionette.ItemView.prototype.mixinTemplateHelpers = function (target) {
+        var self = this;
+        var templateHelpers = Marionette.getOption(self, "templateHelpers");
+        var result = {};
+
+        target = target || {};
+
+        if (_.isFunction(templateHelpers)){
+            templateHelpers = templateHelpers.call(self);
+        }
+
+        // This _.each block is what we're adding
+        _.each(templateHelpers, function (helper, index) {
+            if (_.isFunction(helper)) {
+                result[index] = helper.call(self);
+            } else {
+                result[index] = helper;
+            }
+        });
+
+        return _.extend(target, result);
+    };
 
     /* jshint maxstatements: 14 */
 
