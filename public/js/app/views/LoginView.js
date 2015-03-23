@@ -32,7 +32,7 @@ define(['jquery','underscore', 'hbs!templates/login', 'backbone','hbs!templates/
                         defer.resolve(data);//arg1 value
                         model.set(data);
                        // console.log(json.stringify(options));
-                        console.log('got to data');
+                        console.log('got the data');
                     },
                     error:function(data){
                         defer.resolve(undefinded);
@@ -70,12 +70,12 @@ define(['jquery','underscore', 'hbs!templates/login', 'backbone','hbs!templates/
                 this.model.save({ username: username,password: password});
                 this.collection.add({user:{username:this.model.get('username')}});
                this.model.fetch();
-                console.log(username +'  '+ password);
+                console.log(username);
                 this.$('ul li.main-menu').siblings().removeClass('active');
                 //this.$('ul li.main-menu').first().addClass('active');
                 $("input[data-name='username']").val('');
                 $("input[data-name='password']").val('');
-                window.location.hash = 'about';
+                window.location.hash = '';
 
                 //this.render();
                 //window.location.hash = '/#login';

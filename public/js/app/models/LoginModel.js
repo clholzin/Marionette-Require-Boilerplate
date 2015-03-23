@@ -3,7 +3,7 @@ define(["App","jquery", "backbone"],
         // Creates a new Backbone Model class object
         App.LoginModel = Backbone.Model.extend({
             idAttribute: "_id",
-            urlRoot:'http://localhost:8001/login',
+            url:'http://localhost:8001/login',
             // Model Constructor
             initialize: function() {
                 this.on('error', this.showError);

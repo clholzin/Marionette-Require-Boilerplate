@@ -18,7 +18,7 @@ define(['jquery','underscore', 'hbs!templates/desktopHeader', 'backbone', 'mario
                //this.listenTo(this.model, 'save', this.render);
                 this.listenTo(this.model, 'change', this.render);
                 //this.listenTo(this.model, 'set', this.render);
-               // this.listenTo(this.collection, 'reset', this.render);
+                //this.listenTo(this.collection, 'remove', this.render);
                 console.log('Render HeaderItemView');
 
             },

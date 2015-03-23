@@ -10,24 +10,14 @@ define(['App','underscore', 'backbone', 'marionette', 'jquery', 'views/WelcomeVi
 
         initialize:function(options) {
             var loginModel = new LoginModel;
-            var loginCollection = new LoginCollection();
-
+           // var loginCollection = new LoginCollection();
             var  desktopHeaderView = new DesktopHeaderView({
-                collection:loginCollection,
-                model:loginModel });
+                model: loginModel });
             App.headerRegion.show(desktopHeaderView);
-            App.mainRegion.on("swap", function(view, region, options){
-            return this.initialize();
-            });
-            App.headerRegion.on("show", function(view, region, options){
-                return this.initialize();
-            });
-            /**  user.on("add", function(item) {
-                alert("Ahoy " + item.get("user") + "!");
-            });**/
 
-            /**App.headerRegion.on("show", function(view, region, options){
-                view.render();
+           /**loginModel.on("change", function(DesktopHeaderView) {
+                var d = new DesktopHeaderView;
+                d.render();
             });**/
 
         },
@@ -35,22 +25,21 @@ define(['App','underscore', 'backbone', 'marionette', 'jquery', 'views/WelcomeVi
         index:function() {
             App.mainRegion.show(new WelcomeView());
             App.sideRegion.empty();
-            return this.initialize();
 
         },
         login:function() {
             var loginModel = new LoginModel;
             var loginCollection = new LoginCollection();
 
-          /**  user.on("add", function(item) {
-                alert("Ahoy " + item.get("user") + "!");
-            });**/
-          var  loginView = new LoginView({
+            loginModel.on("set", function(item) {
+                alert("Ahoy " + item.get("username") + "!");
+                this.initialize();
+            });
+          var loginView = new LoginView({
               collection:loginCollection,
               model:loginModel });
             App.mainRegion.show(loginView);
             App.sideRegion.empty();
-            return this.initialize();
         },
         logout:function() {
             var logoutModel = new LogoutModel;
@@ -59,10 +48,12 @@ define(['App','underscore', 'backbone', 'marionette', 'jquery', 'views/WelcomeVi
             loginModel.clear();
             loginCollection.remove();
             logoutModel.fetch();
-
+            loginModel.on("clear", function(item) {
+                alert("Bye bye!");
+                this.initialize();
+            });
             App.mainRegion.show(new LoginView({collection:loginCollection,model:loginModel}));
             App.sideRegion.empty();
-            return this.initialize();
         },
         register:function() {
             var register = new RegisterCollection;
@@ -76,7 +67,6 @@ define(['App','underscore', 'backbone', 'marionette', 'jquery', 'views/WelcomeVi
                 App.mainRegion.show(new AboutView());
                 App.sideRegion.show(new SideBarMain());
             }
-            return this.initialize();
         },
             //part of About
                 reports:function() {
@@ -91,3 +81,19 @@ define(['App','underscore', 'backbone', 'marionette', 'jquery', 'views/WelcomeVi
                 }
     });
 });
+
+/**App.mainRegion.on("swap", function(view, region, options){
+             this.initialize();
+            });**/
+/** App.mainRegion.on("show", function(DesktopHeaderView, region, options){
+                var d = new DesktopHeaderView;
+                d.render();
+            });**/
+
+/**  user.on("add", function(item) {
+                alert("Ahoy " + item.get("user") + "!");
+            });**/
+
+/**App.headerRegion.on("show", function(view, region, options){
+                view.render();
+            });**/
