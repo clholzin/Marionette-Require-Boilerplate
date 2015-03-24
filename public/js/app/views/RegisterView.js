@@ -17,10 +17,10 @@ define( ['App', 'backbone', 'marionette', 'jquery', 'models/RegisterModel', 'hbs
                     password = $("input[data-name='password']").val();
                 this.collection.create({ username: username,password: password}, {
                     success: function(item){
-                        console.log(item.toJSON());
+                        console.log(item.username.toJSON());
                     }
                 });
-                console.log(username +'  '+ password);
+               // console.log(username +'  '+ password);
 
             }
             /**
