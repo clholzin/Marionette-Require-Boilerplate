@@ -16,6 +16,7 @@ module.exports = function (app) {
         console.log('register route');
     });
     app.post('/register', function(req, res) {
+        console.log('post hit');
         Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
             if (err) {
                 //return res.render("register", {info: "Sorry. That username already exists. Try again."});
@@ -24,6 +25,7 @@ module.exports = function (app) {
             passport.authenticate('local')(req, res, function () {
                 //res.redirect('/#');
                 res.json({ user : req.user});
+                console.log('registered user');
             });
         });
     });
@@ -31,7 +33,11 @@ module.exports = function (app) {
 
     app.get('/login', function(req, res) {
         res.json({ user : req.user });
-        console.log(req.user);
+        if(req.user){
+            console.log(req.user);
+        }else{
+            console.log('no user found');
+        }
     });
     app.post('/login', passport.authenticate('local'), function(req, res) {
        // res.redirect('/#');
