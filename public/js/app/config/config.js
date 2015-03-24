@@ -4,7 +4,7 @@ require.config({
     // probably a good idea to keep version numbers in the file names for updates checking
     paths:{
         // Core Libraries
-        "jquery":"../libs/jquery",
+        "jquery":"public/js/app/libs/jquery",
         "jqueryui":"../libs/jqueryui",
         "jquerymobile":"../libs/jquery.mobile",
         "underscore":"../libs/lodash",
